@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>New transaction:</h1>
+<div mat-dialog-content>
+  <form [formGroup]="searchForm">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Name" formControlName="name" (input)="inputName($event)"
+             [matAutocomplete]="autoName">
+
+      <mat-autocomplete #autoName="matAutocomplete">
+        <mat-option *ngFor="let option of userListOptions" [value]="option.name">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" matInput placeholder="Amount" formControlName="amount" (keydown)="keyDown($event)">
+    </mat-form-field>
+  </form>
+</div>
+
+<div>
+  <button mat-button (click)="cancelClick()">Cancel</button>
+  <button mat-button (click)="submit()" [disabled]="searchForm.invalid">Create transaction</button>
+</div>
+
